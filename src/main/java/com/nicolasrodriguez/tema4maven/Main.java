@@ -11,12 +11,13 @@ import java.util.List;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         String texto="Nicolás Rodríguez";
         String banner= FigletFont.convertOneLine(texto);
+
         List<String> lista=new ArrayList<>();
-        for (String lBanner:texto.split("\n")) {
+        for (String lBanner:banner.split("\n")) {
             lista.add(lBanner);
         }
 
@@ -35,6 +36,13 @@ public class Main {
         screen.startScreen();
         screen.setCursorPosition(null);
 
+        int yOffset=screen.getTerminalSize().getRows();
+
+        while (true) {
+            drawFrame(screen, lista, yOffset);
+            Thread.sleep(600);
+            yOffset--;
+        }
     }
 
     private static void drawFrame(Screen screen, List<String> lines, int yOffset)
