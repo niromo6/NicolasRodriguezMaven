@@ -35,7 +35,27 @@ public class Main {
         screen.startScreen();
         screen.setCursorPosition(null);
 
+    }
 
-
+    private static void drawFrame(Screen screen, List<String> lines, int yOffset)
+            throws IOException {
+        TerminalSize size = screen.getTerminalSize();
+        int width = size.getColumns();
+        int height = size.getRows();
+        screen.clear();
+        TextGraphics tg = screen.newTextGraphics();
+        for (int i = 0; i < lines.size(); i++) {
+            int y = yOffset + i;
+            if (y < 0 || y >= height) continue;
+            String line = lines.get(i);
+// Centrado horizontal (opcional, pero queda mejor)
+            int x = Math.max(0, (width - line.length()) / 2);
+            if (x >= width) continue;
+// Recorte simple si se sale por la derecha
+            String visible = (line.length() > width) ? line.substring(0, width) :
+                    line;
+            tg.putString(x, y, visible);
+        }
+        screen.refresh();
     }
 }
