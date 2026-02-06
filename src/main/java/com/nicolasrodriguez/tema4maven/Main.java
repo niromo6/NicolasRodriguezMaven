@@ -20,7 +20,6 @@ public class Main {
             lista.add(lBanner);
         }
 
-        lista.add(banner);
         lista.add("Me llamo Nicolás Rodríguez. Tengo 19 años.");
         lista.add("Soy de Dénia, ALicante.");
         lista.add("Pero actualmente estoy viviendo en Gandía, Valencia.");
